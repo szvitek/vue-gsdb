@@ -11,12 +11,13 @@
       </form>          
     </div>
 
-    <SearchResults v-if="shows.length" />
+    <SearchResults v-if="shows.length" :shows="shows" />
   </div>
 
 </template>
 
 <script>
+import http from '@/services/http.js';
 import SearchResults from './SearchResults.vue';
 export default {
   name: 'home',
@@ -30,8 +31,10 @@ export default {
     }
   },
   methods: {
-    onSearch() {
+    async onSearch() {
       console.log(this.searchTerm);
+      let res = await http.search(this.searchTerm);
+      this.shows = res.map(showObj => showObj.show);      
     }
   }
 }
