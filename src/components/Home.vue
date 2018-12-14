@@ -7,7 +7,7 @@
       <form class="form-inline">
         <label class="sr-only" for="search">Name</label>
         <input type="text" class="form-control" id="search" v-model="searchTerm" placeholder="Search for series...">
-        <button type="submit" @click.prevent="onSearch" class="btn btn-primary my-1">Search</button>
+        <button type="submit" @click.prevent="onSearch" :disabled="isBtnDisabled" class="btn btn-primary my-1">Search</button>
       </form>          
     </div>
 
@@ -30,9 +30,13 @@ export default {
       shows: []
     }
   },
+  computed: {
+    isBtnDisabled() {
+      return this.searchTerm.trim().length ? false : true;
+    }
+  },
   methods: {
     async onSearch() {
-      console.log(this.searchTerm);
       let res = await http.search(this.searchTerm);
       this.shows = res.map(showObj => showObj.show);      
     }
