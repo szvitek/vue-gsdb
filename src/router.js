@@ -18,6 +18,14 @@ export default new Router({
       path: '/details/:id',
       name: 'details',
       component: Details
+    },
+    {
+      path: '*',
+      name: 'notFound',    
+      component: function () { 
+        return import('./views/NotFound.vue')
+      } 
     }
+
   ]
 })

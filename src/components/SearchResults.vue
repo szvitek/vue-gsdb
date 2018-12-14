@@ -10,7 +10,7 @@
         <div v-html="show.summary"></div>
       </div>  
       <div class="col-md-2 button-container">
-        <button class="btn btn-primary">DETAILS</button>
+        <button @click="goToDetails(show.id)" class="btn btn-success">DETAILS</button>
       </div>
     </div>
   </div>
@@ -18,7 +18,12 @@
 
 <script>
 export default {
-  props: [ 'shows' ]
+  props: [ 'shows' ],
+  methods: {
+    goToDetails(id) {
+      this.$router.push({ name: 'details', params: { id } })
+    }
+  }
 }
 </script>
 
